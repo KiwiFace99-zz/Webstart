@@ -95,10 +95,14 @@ function next() {
     let opt = document.getElementById("opt" + (i - 1));
     opt.innerHTML = questions[ind];
   }
+  document.getElementById("progressTag").innerHTML="Progress: "+x+"/4"
+  document.getElementById("progress").value= 25*x
   x++;
 }
 
 function back() {
+  document.getElementById("progressTag").innerHTML="Progress: "+(x-2)+"/4"
+  document.getElementById("progress").value= 25*(x-2)
   if (x == 2) {
     document.getElementById("view1").style.display = "none";
     x--;
@@ -127,6 +131,8 @@ function end(){
   document.getElementById("view2").style.display = "none";
   document.getElementById("view0").style.display = "block";
   alert("Your answer has been submitted")
+  document.getElementById("progressTag").innerHTML="Progress: 0/4"
+  document.getElementById("progress").value= 0
 }
 
 function displayInfo() {
