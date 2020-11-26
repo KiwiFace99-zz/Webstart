@@ -119,6 +119,8 @@ function back() {
     let opt = document.getElementById("opt" + (i - 1));
     opt.innerHTML = questions[ind];
   }
+  let radios = document.getElementsByName("Opt");
+  radios[info[x]].checked=true
 }
 
 function end(){
