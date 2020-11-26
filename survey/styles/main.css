@@ -1,0 +1,49 @@
+* {
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+body{
+    background-color: rgb(183, 183, 224);
+}
+body > *{
+    width: 80%;
+    margin: 20px auto;
+}
+#formContainer > * > *{
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+#view1,#view2{
+    display: none;
+} 
+#view1 > div {
+    background-color: white;
+    font-size: 24px;
+}
+#view2 > div {
+  background-color: white;
+}
+#view2 > div > h4 {
+  text-align: center;
+}
+.myBtn{
+  width: 49%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+  margin-top: 20px;
+  font-size: 16px;
+}
+#info{
+  font-size: 36px;
+  font-weight: bold;
+  text-align: center;
+}
+#question{
+  font-size: 30px;
+}
