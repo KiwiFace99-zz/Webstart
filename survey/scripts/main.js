@@ -35,13 +35,11 @@ function validateForm() {
   } else if (!age.checkValidity()) {
     alert("Age: \n"+age.validationMessage);
   } else {
-    info = {
-      fname: fname.value,
-      lname: lname.value,
-      email: email.value,
-      country: country.value,
-      age: age.value,
-    };
+      info.fname= fname.value
+      info.lname= lname.value
+      info.email= email.value
+      info.country= country.value
+      info.age= age.value
     next();
   }
 }
@@ -65,6 +63,7 @@ function validateAnswer() {
 }
 
 function next() {
+  console.log(JSON.stringify(info));
   if (x !== 0) {
     if(validateAnswer()){
       return
@@ -97,9 +96,11 @@ function next() {
   }
   document.getElementById("progressTag").innerHTML="Progress: "+x+"/4"
   document.getElementById("progress").value= 25*x
-  x++;
   let radios = document.getElementsByName("Opt");
-  radios[info[x]].checked=true
+  x++;
+  if(info[x]!==undefined){
+    radios[info[x]].checked=true
+  }
 }
 
 function back() {
@@ -122,7 +123,9 @@ function back() {
     opt.innerHTML = questions[ind];
   }
   let radios = document.getElementsByName("Opt");
-  radios[info[x]].checked=true
+  if(info[x]!==undefined){
+    radios[info[x]].checked=true
+  }
 }
 
 function end(){
