@@ -27,19 +27,19 @@ function validateForm() {
   age = document.getElementById("age");
 
   if (!fname.checkValidity()) {
-    alert("First Name: \n"+age.validationMessage);
+    alert("First Name: \n" + age.validationMessage);
   } else if (!lname.checkValidity()) {
-    alert("Last Name: \n"+age.validationMessage);
+    alert("Last Name: \n" + age.validationMessage);
   } else if (!email.checkValidity()) {
-    alert("Email: \n"+age.validationMessage);
+    alert("Email: \n" + age.validationMessage);
   } else if (!age.checkValidity()) {
-    alert("Age: \n"+age.validationMessage);
+    alert("Age: \n" + age.validationMessage);
   } else {
-      info.fname= fname.value
-      info.lname= lname.value
-      info.email= email.value
-      info.country= country.value
-      info.age= age.value
+    info.fname = fname.value;
+    info.lname = lname.value;
+    info.email = email.value;
+    info.country = country.value;
+    info.age = age.value;
     next();
   }
 }
@@ -59,14 +59,14 @@ function validateAnswer() {
   if (error) {
     alert("You must answer");
   }
-  return error
+  return error;
 }
 
 function next() {
   console.log(JSON.stringify(info));
   if (x !== 0) {
-    if(validateAnswer()){
-      return
+    if (validateAnswer()) {
+      return;
     }
     let radios = document.getElementsByName("Opt");
     let length = radios.length;
@@ -77,12 +77,12 @@ function next() {
         break;
       }
     }
-    if(x==4){
+    if (x == 4) {
       document.getElementById("view1").style.display = "none";
       document.getElementById("view2").style.display = "block";
-      document.getElementById("info").innerHTML=displayInfo()
+      document.getElementById("info").innerHTML = displayInfo();
     }
-  }else{
+  } else {
     document.getElementById("view0").style.display = "none";
     document.getElementById("view1").style.display = "block";
     x++;
@@ -94,24 +94,25 @@ function next() {
     let opt = document.getElementById("opt" + (i - 1));
     opt.innerHTML = questions[ind];
   }
-  document.getElementById("progressTag").innerHTML="Progress: "+x+"/4"
-  document.getElementById("progress").value= 25*x
+  document.getElementById("progressTag").innerHTML = "Progress: " + x + "/4";
+  document.getElementById("progress").value = 25 * x;
   let radios = document.getElementsByName("Opt");
   x++;
-  if(info[x]!==undefined){
-    radios[info[x]].checked=true
+  if (info[x] !== undefined) {
+    radios[info[x]].checked = true;
   }
 }
 
 function back() {
-  document.getElementById("progressTag").innerHTML="Progress: "+(x-2)+"/4"
-  document.getElementById("progress").value= 25*(x-2)
+  document.getElementById("progressTag").innerHTML =
+    "Progress: " + (x - 2) + "/4";
+  document.getElementById("progress").value = 25 * (x - 2);
   if (x == 2) {
     document.getElementById("view1").style.display = "none";
     x--;
     document.getElementById("view0").style.display = "block";
   }
-  if( x== 5){
+  if (x == 5) {
     document.getElementById("view2").style.display = "none";
     document.getElementById("view1").style.display = "block";
   }
@@ -123,23 +124,23 @@ function back() {
     opt.innerHTML = questions[ind];
   }
   let radios = document.getElementsByName("Opt");
-  if(info[x]!==undefined){
-    radios[info[x]].checked=true
+  if (info[x] !== undefined) {
+    radios[info[x]].checked = true;
   }
 }
 
-function end(){
-  document.getElementById("fname").value="";
-  document.getElementById("lname").value="";
-  document.getElementById("email").value="";
-  document.getElementById("country").value="Europe";
-  document.getElementById("age").value="";
-  info ={}
+function end() {
+  document.getElementById("fname").value = "";
+  document.getElementById("lname").value = "";
+  document.getElementById("email").value = "";
+  document.getElementById("country").value = "Europe";
+  document.getElementById("age").value = "";
+  info = {};
   document.getElementById("view2").style.display = "none";
   document.getElementById("view0").style.display = "block";
-  alert("Your answer has been submitted")
-  document.getElementById("progressTag").innerHTML="Progress: 0/4"
-  document.getElementById("progress").value= 0
+  alert("Your answer has been submitted");
+  document.getElementById("progressTag").innerHTML = "Progress: 0/4";
+  document.getElementById("progress").value = 0;
 }
 
 function displayInfo() {
