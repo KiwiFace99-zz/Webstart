@@ -1,0 +1,46 @@
+* {
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+body {
+  background-color: rgb(231, 231, 231);
+}
+body > * {
+  margin-left: 10%;
+  width: 80%;
+}
+
+#displayimage{
+  max-width: 30%;
+  float: left;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+#displayinfo{
+  max-width: 55%;
+  float: left;
+  margin-left: 5%;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+.grid-container {
+  background-color: rgb(231, 231, 231);
+  display: grid;
+  grid-template-columns: auto auto;
+}
+
+.grid-container > div {
+  background-color: white;
+  border-radius: 5px;
+  border: 1px solid rgba(184, 184, 184, 0.74);
+  display: inline-flex;
+  font-size: 16px;
+  margin-bottom: 15px;
+  max-width: 400px;
+}
+
+.movies > * {
+  padding: 20px;
+}
+

@@ -1,0 +1,12 @@
+extends layout
+
+block content
+    h1 #{header}
+    .grid-container
+        each movie, i in movies.results
+            .movies
+                a(href='/movie/'+i)
+                    -const imageAttributes={"src":imageBaseUrl+"w185"+movie.poster_path ,"alt":imageBaseUrl+"w185"+movie.poster_path}
+                    img&attributes(imageAttributes)
+                div
+                    p= movie.title
