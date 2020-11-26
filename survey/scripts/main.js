@@ -98,6 +98,8 @@ function next() {
   document.getElementById("progressTag").innerHTML="Progress: "+x+"/4"
   document.getElementById("progress").value= 25*x
   x++;
+  let radios = document.getElementsByName("Opt");
+  radios[info[x]].checked=true
 }
 
 function back() {
