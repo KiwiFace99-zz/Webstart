@@ -94,7 +94,8 @@ function next() {
     opt.innerHTML = questions[ind];
   }
   document.getElementById("progressTag").innerHTML = "Progress: " + x + "/4";
-  document.getElementById("progress").value = 25 * x;
+  // document.getElementById("progress").value = 25 * x;
+  moveBar(25*x);
   let radios = document.getElementsByName("Opt");
   x++;
   if (info[x] !== undefined) {
@@ -105,7 +106,8 @@ function next() {
 function back() {
   document.getElementById("progressTag").innerHTML =
     "Progress: " + (x - 2) + "/4";
-  document.getElementById("progress").value = 25 * (x - 2);
+  // document.getElementById("progress").value = 25 * (x - 2);
+  moveBarBack(25 * (x - 2));
   if (x == 2) {
     document.getElementById("view1").style.display = "none";
     x--;
@@ -163,4 +165,31 @@ function displayInfo() {
       "<br><br>";
   }
   return txt;
+}
+
+function moveBar(w) {
+  var elem = document.getElementById("progress");   
+  var width = document.getElementById("progress").value;
+  var id = setInterval(frame, 10);
+  function frame() {
+    if (width >= w) {
+      clearInterval(id);
+    } else {
+      width++; 
+      elem.value = width; 
+    }
+  }
+}
+function moveBarBack(w) {
+  var elem = document.getElementById("progress");   
+  var width = document.getElementById("progress").value;
+  var id = setInterval(frame, 10);
+  function frame() {
+    if (width <= w) {
+      clearInterval(id);
+    } else {
+      width--; 
+      elem.value = width; 
+    }
+  }
 }
