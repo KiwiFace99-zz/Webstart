@@ -63,7 +63,6 @@ function validateAnswer() {
 }
 
 function next() {
-  console.log(JSON.stringify(info));
   if (x !== 0) {
     if (validateAnswer()) {
       return;
@@ -136,6 +135,7 @@ function end() {
   document.getElementById("country").value = "Europe";
   document.getElementById("age").value = "";
   info = {};
+  x = 0;
   document.getElementById("view2").style.display = "none";
   document.getElementById("view0").style.display = "block";
   alert("Your answer has been submitted");
