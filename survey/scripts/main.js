@@ -1,7 +1,7 @@
 let info = {};
 let fname, lname, email, country, age;
-var x = 0;
-let questions = [
+let tracker = 0;
+const questions = [
   "Fav small letter",
   "a",
   "b",
@@ -17,7 +17,24 @@ let questions = [
   "B",
   "C",
   "D",
+  "Fav pet",
+  "Cat",
+  "Dog",
+  "Fish",
+  "Bird",
 ];
+const numberOfQuestions = questions.length / 5 + 1;
+const incrementAmount = 100 / numberOfQuestions;
+
+window.onload = function () {
+  document.getElementById("myBtn").addEventListener("click", validateForm);
+  document.getElementById("next").addEventListener("click", next);
+  document.getElementById("end").addEventListener("click", end);
+  document.getElementById("firstBack").addEventListener("click", back);
+  document.getElementById("lastBack").addEventListener("click", back);
+  document.getElementById("progressTag").innerHTML =
+    "Progress: " + tracker + "/" + numberOfQuestions;
+};
 
 function validateForm() {
   fname = document.getElementById("fname");
@@ -48,9 +65,9 @@ function validateAnswer() {
   let radios = document.getElementsByName("Opt");
   let length = radios.length;
   let error = true;
-  for (var i = 0; i < length; i++) {
+  for (let i = 0; i < length; i++) {
     if (radios[i].checked) {
-      info[x] = radios[i].value;
+      info[tracker] = radios[i].value;
       radios[i].checked = false;
       error = false;
       break;
@@ -63,20 +80,20 @@ function validateAnswer() {
 }
 
 function next() {
-  if (x !== 0) {
+  if (tracker !== 0) {
     if (validateAnswer()) {
       return;
     }
     let radios = document.getElementsByName("Opt");
     let length = radios.length;
-    for (var i = 0; i < length; i++) {
+    for (let i = 0; i < length; i++) {
       if (radios[i].checked) {
-        info[x] = radios[i].value;
+        info[tracker] = radios[i].value;
         radios[i].checked = false;
         break;
       }
     }
-    if (x == 4) {
+    if (tracker == numberOfQuestions) {
       document.getElementById("view1").style.display = "none";
       document.getElementById("view2").style.display = "block";
       document.getElementById("info").innerHTML = displayInfo();
@@ -84,49 +101,50 @@ function next() {
   } else {
     document.getElementById("view0").style.display = "none";
     document.getElementById("view1").style.display = "block";
-    x++;
+    tracker++;
   }
 
-  document.getElementById("question").innerHTML = questions[(x - 1) * 5];
-  for (var i = 1; i < 5; i++) {
-    let ind = (x - 1) * 5 + i;
+  document.getElementById("question").innerHTML = questions[(tracker - 1) * 5];
+  for (let i = 1; i < 5; i++) {
+    let ind = (tracker - 1) * 5 + i;
     let opt = document.getElementById("opt" + (i - 1));
     opt.innerHTML = questions[ind];
   }
-  document.getElementById("progressTag").innerHTML = "Progress: " + x + "/4";
-  // document.getElementById("progress").value = 25 * x;
-  moveBar(25*x);
+  document.getElementById("progressTag").innerHTML =
+    "Progress: " + tracker + "/" + numberOfQuestions;
+  // document.getElementById("progress").value = 25 * tracker;
+  moveBar(incrementAmount * tracker);
   let radios = document.getElementsByName("Opt");
-  x++;
-  if (info[x] !== undefined) {
-    radios[info[x]].checked = true;
+  tracker++;
+  if (info[tracker] !== undefined) {
+    radios[info[tracker]].checked = true;
   }
 }
 
 function back() {
   document.getElementById("progressTag").innerHTML =
-    "Progress: " + (x - 2) + "/4";
-  // document.getElementById("progress").value = 25 * (x - 2);
-  moveBarBack(25 * (x - 2));
-  if (x == 2) {
+    "Progress: " + (tracker - 2) + "/" + numberOfQuestions;
+  // document.getElementById("progress").value = 25 * (tracker - 2);
+  moveBarBack(incrementAmount * (tracker - 2));
+  if (tracker == 2) {
     document.getElementById("view1").style.display = "none";
-    x--;
+    tracker--;
     document.getElementById("view0").style.display = "block";
   }
-  if (x == 5) {
+  if (tracker == numberOfQuestions + 1) {
     document.getElementById("view2").style.display = "none";
     document.getElementById("view1").style.display = "block";
   }
-  x--;
-  document.getElementById("question").innerHTML = questions[(x - 2) * 5];
-  for (var i = 1; i < 5; i++) {
-    let ind = (x - 2) * 5 + i;
+  tracker--;
+  document.getElementById("question").innerHTML = questions[(tracker - 2) * 5];
+  for (let i = 1; i < 5; i++) {
+    let ind = (tracker - 2) * 5 + i;
     let opt = document.getElementById("opt" + (i - 1));
     opt.innerHTML = questions[ind];
   }
   let radios = document.getElementsByName("Opt");
-  if (info[x] !== undefined) {
-    radios[info[x]].checked = true;
+  if (info[tracker] !== undefined) {
+    radios[info[tracker]].checked = true;
   }
 }
 
@@ -137,11 +155,12 @@ function end() {
   document.getElementById("country").value = "Europe";
   document.getElementById("age").value = "";
   info = {};
-  x = 0;
+  tracker = 0;
   document.getElementById("view2").style.display = "none";
   document.getElementById("view0").style.display = "block";
   alert("Your answer has been submitted");
-  document.getElementById("progressTag").innerHTML = "Progress: 0/4";
+  document.getElementById("progressTag").innerHTML =
+    "Progress: 0/" + numberOfQuestions;
   document.getElementById("progress").value = 0;
 }
 
@@ -151,7 +170,7 @@ function displayInfo() {
   txt += "Email: " + info.email + "<br><br>";
   txt += "Country: " + info.country + "<br><br>";
   txt += "Age: " + info.age + "<br><br>";
-  for (var i = 1; i < x; i++) {
+  for (let i = 1; i < tracker; i++) {
     questionNum = (i - 1) * 5;
     answerNum = questionNum + parseInt(info[i + 1]) + 1;
     txt +=
@@ -168,28 +187,28 @@ function displayInfo() {
 }
 
 function moveBar(w) {
-  var elem = document.getElementById("progress");   
-  var width = document.getElementById("progress").value;
-  var id = setInterval(frame, 10);
+  let elem = document.getElementById("progress");
+  let width = document.getElementById("progress").value;
+  let id = setInterval(frame, 10);
   function frame() {
     if (width >= w) {
       clearInterval(id);
     } else {
-      width++; 
-      elem.value = width; 
+      width++;
+      elem.value = width;
     }
   }
 }
 function moveBarBack(w) {
-  var elem = document.getElementById("progress");   
-  var width = document.getElementById("progress").value;
-  var id = setInterval(frame, 10);
+  let elem = document.getElementById("progress");
+  let width = document.getElementById("progress").value;
+  let id = setInterval(frame, 10);
   function frame() {
     if (width <= w) {
       clearInterval(id);
     } else {
-      width--; 
-      elem.value = width; 
+      width--;
+      elem.value = width;
     }
   }
 }

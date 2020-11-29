@@ -1,17 +1,49 @@
 doctype html
 html
-    head
-        link(rel='stylesheet' href='styles/main.css')
-        script(src='scripts/main.js')
-    body
-        form(name='myForm' action='/action_page.php')
-            input(type='text' name='fname' placeholder='First Name' required)
-            input(type='text' name='lname' placeholder='Last Name' required)
-            input(type='email' name='fname' placeholder='Your Email' required)
-            select(name='country' required='')
-                option(value='europe') Europe
-                option(value='asia') Asia
-                option(value='north america') North America
-                option(value='south america') South America
-            input(type='number' name='age' min='18' max='120' required)
-            input(type='submit' value='Submit')
+  head
+    link(rel='stylesheet' href='styles/main.css')
+    script(src='scripts/main.js')
+  body
+    header
+      div
+        h1 My Survey
+      .progress
+        label#progressTag(for='progress') Progress: 0/4
+        progress#progress(value='0' max='100')
+    #formContainer
+      #view0
+        input#fname(type='text' name='fname' placeholder='First Name' required='')
+        input#lname(type='text' name='lname' placeholder='Last Name' required='')
+        input#email(type='email' name='email' placeholder='Your Email' required='')
+        select#country(name='country' required='')
+          option(value='Europe') Europe
+          option(value='Asia') Asia
+          option(value='North America') North America
+          option(value='South America') South America
+        input#age(type='number' min='18' max='100' placeholder='Age' required='')
+        button#myBtn Next
+      #view1
+        div
+          h3#question question
+          input(type='radio' name='Opt' value='0' required='')
+          label#opt0(for='0') opt0
+          br
+          input(type='radio' name='Opt' value='1')
+          label#opt1(for='1') opt1
+          br
+          input(type='radio' name='Opt' value='2')
+          label#opt2(for='2') opt2
+          br
+          input(type='radio' name='Opt' value='3')
+          label#opt3(for='3') opt3
+          br
+          button#firstBack.myBtn Back
+          button#next.myBtn Next
+      #view2
+        div
+          p#info
+          h4
+            | If you are sure of the information above press on end or press back
+            | to change the information
+          button#lastBack.myBtn Back
+          button#end.myBtn End

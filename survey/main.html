@@ -51,7 +51,7 @@
           placeholder="Age"
           required
         />
-        <button id="myBtn" onclick="validateForm()">Next</button>
+        <button id="myBtn">Next</button>
       </div>
       <div id="view1">
         <div>
@@ -64,8 +64,8 @@
           <label for="2" id="opt2">opt2</label><br />
           <input type="radio" name="Opt" value="3" />
           <label for="3" id="opt3">opt3</label><br />
-          <button class="myBtn" onclick="back()">Back</button>
-          <button class="myBtn" onclick="next()">Next</button>
+          <button class="myBtn" id="firstBack">Back</button>
+          <button class="myBtn" id="next">Next</button>
         </div>
       </div>
       <div id="view2">
@@ -75,8 +75,8 @@
             If you are sure of the information above press on end or press back
             to change the information
           </h4>
-          <button class="myBtn" onclick="back()">Back</button>
-          <button class="myBtn" onclick="end()">End</button>
+          <button class="myBtn" id="lastBack">Back</button>
+          <button class="myBtn" id="end">End</button>
         </div>
       </div>
     </div>
