@@ -8,7 +8,7 @@ html
       div
         h1 My Survey
       .progress
-        label#progressTag(for='progress') Progress: 0/4
+        label#progressTag(for='progress')
         progress#progress(value='0' max='100')
     #formContainer
       #view0
@@ -24,18 +24,18 @@ html
         button#myBtn Next
       #view1
         div
-          h3#question question
+          h3#question
           input(type='radio' name='Opt' value='0' required='')
-          label#opt0(for='0') opt0
+          label#opt0(for='0')
           br
           input(type='radio' name='Opt' value='1')
-          label#opt1(for='1') opt1
+          label#opt1(for='1')
           br
           input(type='radio' name='Opt' value='2')
-          label#opt2(for='2') opt2
+          label#opt2(for='2')
           br
           input(type='radio' name='Opt' value='3')
-          label#opt3(for='3') opt3
+          label#opt3(for='3')
           br
           button#firstBack.myBtn Back
           button#next.myBtn Next

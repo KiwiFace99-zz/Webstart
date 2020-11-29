@@ -36,6 +36,9 @@ window.onload = function () {
     "Progress: " + tracker + "/" + numberOfQuestions;
 };
 
+/*This function checks if the form has valid values 
+if thats true then procceeds into the next view 
+otherwise an alert prompts the user to fill with valid values*/
 function validateForm() {
   fname = document.getElementById("fname");
   lname = document.getElementById("lname");
@@ -61,6 +64,8 @@ function validateForm() {
   }
 }
 
+/* This function checks if the radio qestions are answered
+ if not an alert pops up propting the user to answer*/
 function validateAnswer() {
   let radios = document.getElementsByName("Opt");
   let length = radios.length;
@@ -79,6 +84,7 @@ function validateAnswer() {
   return error;
 }
 
+/* This function simply loads the appropriate view after next is pressed */
 function next() {
   if (tracker !== 0) {
     if (validateAnswer()) {
@@ -112,7 +118,6 @@ function next() {
   }
   document.getElementById("progressTag").innerHTML =
     "Progress: " + tracker + "/" + numberOfQuestions;
-  // document.getElementById("progress").value = 25 * tracker;
   moveBar(incrementAmount * tracker);
   let radios = document.getElementsByName("Opt");
   tracker++;
@@ -121,10 +126,10 @@ function next() {
   }
 }
 
+/* This function simply loads the appropriate view after back is pressed */
 function back() {
   document.getElementById("progressTag").innerHTML =
     "Progress: " + (tracker - 2) + "/" + numberOfQuestions;
-  // document.getElementById("progress").value = 25 * (tracker - 2);
   moveBarBack(incrementAmount * (tracker - 2));
   if (tracker == 2) {
     document.getElementById("view1").style.display = "none";
@@ -148,6 +153,8 @@ function back() {
   }
 }
 
+/* This function resets the default values and alert the user that 
+the info is submitted then loads the first iew restarting the survey */
 function end() {
   document.getElementById("fname").value = "";
   document.getElementById("lname").value = "";
@@ -164,6 +171,7 @@ function end() {
   document.getElementById("progress").value = 0;
 }
 
+/* This function return the info of the user in a user friendly way to view*/
 function displayInfo() {
   let txt = "";
   txt += "Name: " + info.fname + " " + info.lname + "<br><br>";
@@ -186,6 +194,8 @@ function displayInfo() {
   return txt;
 }
 
+/* This function is responsable of the animation of the progress bar
+ when moving forward in the survey */
 function moveBar(w) {
   let elem = document.getElementById("progress");
   let width = document.getElementById("progress").value;
@@ -199,6 +209,9 @@ function moveBar(w) {
     }
   }
 }
+
+/* This function is responsable of the animation of the progress bar
+ when moving backward in the survey */
 function moveBarBack(w) {
   let elem = document.getElementById("progress");
   let width = document.getElementById("progress").value;
