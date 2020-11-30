@@ -1,0 +1,37 @@
+	describe('setDisqusAuthenticationObject', () => {
+		const setDisqusAuthenticationObject = desktopArticleService.__get__('setDisqusAuthenticationObject');
+		const mockHmacSHA1 = sinon.stub().returns(['hello', 'world']);
+		const mockStringify = sinon.stub().returns('helloworld');
+		const mockKeys = {
+			disqusPublic: 'mock public',
+			disqusSecret: 'mock secret',
+		};
+
+		beforeEach(() => {
+			desktopArticleService.__set__({
+				CryptoJS: {
+					HmacSHA1: mockHmacSHA1,
+					enc: {
+						Hex: {
+							stringify: mockStringify,
+						},
+					},
+				},
+			});
+		});
+
+		it('should return a disqus auth object if user data is passed', () => {
+			const timestamp = Math.round(+new Date() / 1000);
+
+			const results = setDisqusAuthenticationObject({ name: 'drew' }, mockKeys);
+			expect(results).to.deep.eql({
+				disqusPublic: 'mock public',
+				auth: `eyJuYW1lIjoiZHJldyJ9 helloworld ${timestamp}`,
+			});
+		});
+
+		it('should safety check and return an empty object', () => {
+			const results = setDisqusAuthenticationObject();
+			expect(results).to.deep.eql({});
+		});
+	});
