@@ -1,0 +1,135 @@
+@mixin ad-label($content) {
+	content: $content;
+	display: block;
+	font: 400 10px/10px $font-sans;
+	margin-bottom: 10px;
+	text-align: center;
+	width: 100%;
+}
+
+body:not(.adblock-on) {
+	fbs-ad:not([position="top"]):not([position="ntv-deskchannel"]):not([position="ntv-mobchannel"]):not([position="ntv-home"]):not([position="mobile"]):not([position="mobsearch"]):not([position="ntv-mobhome"]):not([position="ntv-rail-2"]):not([position="artbottom"]):not([position="qotd"]):not([position="qotd-mob"]) {
+		> div.show-label {
+			position: relative;
+
+			&:before {
+				@include ad-label('ADVERTISEMENT');
+			}
+		}
+
+		> .native-ad.show-label {
+			&:before {
+				@include ad-label('PROMOTED')
+			}
+		}
+	}
+
+	fbs-ad {
+		> .blocker.show-label {
+			&:before {
+				@include ad-label('')
+			}
+		}
+	}
+
+	.search-results__stream-ad {
+		position: relative;
+
+		&:before {
+			@include ad-label('ADVERTISEMENT');
+		}
+	}
+
+	.main-content--desktop-article,
+	.premium-container {
+		fbs-ad[position="top"],
+		fbs-ad[position="topx"] {
+			position: relative;
+
+			> div.show-label:before {
+				@include ad-label(attr(data-content));
+				width: 100%;
+				text-align: center;
+			}
+		}
+	}
+
+	.main-content--desktop-article {
+		fbs-ad[position="top"] {
+			> div {
+				padding: 20px;
+
+				&.show-label:before {
+					position: absolute;
+					top: 10px;
+					background-color: yellow;
+				}
+			}
+		}
+	}
+
+	.main-content:not(.main-content--desktop-article) {
+		fbs-ad[position="top"],
+		fbs-ad[position="topx"],
+		fbs-ad[position="rec"],
+		fbs-ad[position="recx"],
+		fbs-ad[position="moreon"],
+		fbs-ad[position="mobilerec"],
+		fbs-ad[position="mobilex"],
+		.search-results__stream-ad  {
+			color: $default-gray;
+		}
+	}
+
+	article {
+		.top-ad-container {
+			color: $default-gray;
+		}
+
+		.main-content--body:not(.premium) {
+			fbs-ad[position="top"],
+			fbs-ad[position="rec"],
+			fbs-ad[position="recx"] {
+				color: $default-gray;
+			}
+
+			.footer-ad-labeling:after {
+				@include ad-label('ADVERTISEMENT');
+				color: $default-gray;
+			}
+		}
+	}
+
+	.fbs-ad--mobile-medianet-wrapper,
+	.fbs-ad--bottom-medianet-wrapper {
+		color: $default-gray;
+		position: relative;
+
+		> div:before {
+			@include ad-label('ADVERTISEMENT');
+		}
+	}
+
+	.gallery-wrap {
+		.fbs-ad--rec-wrapper,
+		.fbs-ad--recx-wrapper {
+			display: flex;
+		}
+	}
+
+	.contributor-leaderboard-ad {
+		fbs-ad[position="top"] > div.show-label:before {
+			@include ad-label('ADVERTISEMENT');
+		}
+	}
+
+	.article-body:not(.fs-premium) .footer-ad-labeling {
+		margin-top: 1rem;
+
+		&:after {
+			@include ad-label('ADVERTISEMENT');
+			color: $default-gray;
+		}
+	}
+}
+
